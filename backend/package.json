@@ -2,15 +2,16 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Chat app",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node server",
-    "dev": "nodemon server",
+    "start": "node app",
+    "dev": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Julian",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "mongoose": "^5.10.10",
