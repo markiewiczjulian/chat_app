@@ -7,14 +7,28 @@
       {{ this.userTypingInfo }}
     </div>
     <div class="inputSection">
-      <button @click="this.toggleEmojiPanel">emoji</button>
+      <span
+        @click="this.toggleEmojiPanel"
+        class="emojiBtn"
+        @mouseover="emojiIcon = 'laugh-wink'"
+        @mouseleave="emojiIcon = 'laugh'"
+      >
+        <font-awesome-icon :icon="emojiIcon" />
+      </span>
       <VEmojiPicker
         class="emojiPanel"
         :class="[emojiPanelOpen ? 'opened' : 'closed']"
         @select="selectEmoji"
       />
-      <input @keyup.enter="addNewMsg(message)" v-model="message" type="text" />
-      <button :disabled="btnDisabled" @click="addNewMsg(message)">send</button>
+      <input
+        @keyup.enter="addNewMsg(message)"
+        v-model="message"
+        type="text"
+        class="inputBox"
+      />
+      <span :disabled="btnDisabled" @click="addNewMsg(message)" class="sendBtn">
+        <font-awesome-icon icon="paper-plane" />
+      </span>
     </div>
   </div>
 </template>
@@ -34,16 +48,17 @@
         message: "",
         userTypingInfo: "",
         emojiPanelOpen: false,
+        emojiIcon: "laugh"
       };
     },
     components: {
       VEmojiPicker,
     },
     created() {
-      this.socket = io("http://localhost:3000/");
+      this.socket = io("http://localhost:4000/");
     },
     mounted() {
-      this.axios.get("http://localhost:3000/chatRoom").then((res) => {
+      this.axios.get("http://localhost:4000/chatRoom").then((res) => {
         res.data.map((el) => {
           el.message = this.parseEmoji(el.message);
         });
@@ -100,9 +115,11 @@
         return emoji.unemojify(txt);
       },
       addNewMsg(msg) {
-        this.socket.emit("addedMessage", this.unparseEmoji(msg));
-        this.message = "";
-        this.emojiPanelOpen = false;
+        if (!this.btnDisabled) {
+          this.socket.emit("addedMessage", this.unparseEmoji(msg));
+          this.message = "";
+          this.emojiPanelOpen = false;
+        }
       },
       idToTimestamp(id) {
         //   toLocaleString powinno zadziałać z pudełka bez żadnego łątania stringami
@@ -128,10 +145,34 @@
     color: red;
   }
   .inputSection {
+    display: flex;
     position: relative;
+    .inputBox {
+      width: 100%;
+    }
+    .sendBtn {
+      cursor: pointer;
+      &:hover {
+        animation: shake-animation 0.82s both;
+        transform: translate3d(0, 0, 0);
+      }
+      svg {
+        font-size: 40px;
+      }
+    }
+    .emojiBtn {
+      cursor: pointer;
+      &:hover {
+        transform: rotate(0deg);
+        animation: rotate-animation 0.82s infinite;
+      }
+      svg {
+        font-size: 40px;
+      }
+    }
     .emojiPanel {
       position: absolute;
-      bottom: 0;
+      bottom: 45px;
       transition: all 0.3s ease-in-out;
       &.opened {
         opacity: 1;
@@ -140,6 +181,36 @@
         opacity: 0;
         height: 0;
       }
+    }
+  }
+
+  @keyframes shake-animation {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
+    }
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+
+  @keyframes rotate-animation {
+    20% {
+      transform: rotate(10deg);
+    }
+    40%,
+    100% {
+      transform: rotate(-10deg);
     }
   }
 </style>
