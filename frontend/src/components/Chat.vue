@@ -8,10 +8,18 @@
         <div
           v-for="(message, index) of messages"
           :key="index"
-          class="singleMessage"
+          :class="[
+            message.sender === currUserName ? 'loggedUserMsg' : '',
+            'singleMessage',
+          ]"
         >
           <div class="text">{{ message.message }}</div>
-          <div class="author">{{ message.sender }}</div>
+          <div class="author">
+            <img src="../assets/avatars/man/5.svg" alt="" />
+            <span>
+              {{ message.sender }}
+            </span>
+          </div>
           <div class="date">{{ idToTimestamp(message._id) }}</div>
         </div>
       </div>
@@ -170,21 +178,26 @@
 <style lang="scss">
   .chatContainer {
     font-family: Arial, Helvetica, sans-serif;
-    color: white;
+    color: $white;
     width: 100%;
     margin: auto;
     .loggedInUser {
-      color: black;
+      color: $black;
     }
     .messagesContainer {
+      margin: 0 20px;
       overflow-y: scroll;
       overflow-x: hidden;
       height: calc(100vh - 100px);
       display: flex;
       flex-direction: column;
-      align-items: center;
       .singleMessage {
-        background-color: lightgrey;
+        &.loggedUserMsg {
+          align-self: flex-end;
+          background-color: $melon;
+        }
+        align-self: flex-start;
+        background-color: $powder-blue;
         padding: 20px;
         border-radius: 50px;
         margin: 20px 0;
@@ -196,6 +209,20 @@
         .date {
           font-size: 12px;
         }
+        .author {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          span {
+          }
+          img {
+            width: 80px;
+            height: 80px;
+            background-color: $white;
+            box-shadow: 3px 3px 10px $black;
+            border-radius: 40px;
+          }
+        }
       }
     }
     .userInfo {
@@ -206,9 +233,9 @@
       position: relative;
       height: 50px;
       justify-content: space-evenly;
-      border: 3px solid grey;
+      border: 3px solid $black-coral;
       border-radius: 10px;
-      box-shadow: 2px 2px 7px 0px black;
+      box-shadow: 2px 2px 7px 0px $black-coral;
       .inputBox {
         width: 90%;
         border: none;
@@ -220,7 +247,7 @@
       }
       .sendBtn {
         cursor: pointer;
-        color: gray;
+        color: $black-coral;
         display: flex;
         align-items: center;
         height: 100%;
@@ -234,7 +261,7 @@
       }
       .emojiBtn {
         cursor: pointer;
-        color: gray;
+        color: $black-coral;
         display: flex;
         align-items: center;
         height: 100%;
@@ -274,36 +301,6 @@
   @media screen and (min-width: 1500px) {
     .chatContainer {
       width: 60%;
-    }
-  }
-
-  @keyframes shake-animation {
-    10%,
-    90% {
-      transform: translate3d(-1px, 0, 0);
-    }
-    20%,
-    80% {
-      transform: translate3d(2px, 0, 0);
-    }
-    30%,
-    50%,
-    70% {
-      transform: translate3d(-4px, 0, 0);
-    }
-    40%,
-    60% {
-      transform: translate3d(4px, 0, 0);
-    }
-  }
-
-  @keyframes rotate-animation {
-    20% {
-      transform: rotate(10deg);
-    }
-    40%,
-    100% {
-      transform: rotate(-10deg);
     }
   }
 </style>

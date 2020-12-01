@@ -19,7 +19,4 @@
 </script>
 
 <style lang="scss">
-  amplify-button.hydrated .button {
-    background-color: red;
-  }
 </style>
