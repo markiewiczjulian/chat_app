@@ -13,14 +13,16 @@
             'singleMessage',
           ]"
         >
-          <div class="text">{{ message.message }}</div>
-          <div class="author">
+          <div class="authorAvatar">
             <img src="../assets/avatars/man/5.svg" alt="" />
-            <span>
+          </div>
+          <div class="content">
+            <span class="author">
               {{ message.sender }}
             </span>
+            <div class="text">{{ message.message }}</div>
+            <div class="date">{{ idToTimestamp(message._id) }}</div>
           </div>
-          <div class="date">{{ idToTimestamp(message._id) }}</div>
         </div>
       </div>
       <div v-show="this.userTypingInfo.length" class="userInfo">
@@ -202,25 +204,33 @@
         border-radius: 50px;
         margin: 20px 0;
         width: 80%;
-        .text {
-          overflow-wrap: anywhere;
-          font-size: 18px;
-        }
-        .date {
-          font-size: 12px;
-        }
-        .author {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          span {
-          }
+        display: flex;
+        .authorAvatar {
+          margin-right: 20px;
           img {
             width: 80px;
             height: 80px;
             background-color: $white;
             box-shadow: 3px 3px 10px $black;
             border-radius: 40px;
+          }
+        }
+        .content {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          justify-content: space-between;
+          .text {
+            overflow-wrap: anywhere;
+            font-size: 18px;
+            margin: 10px 0;
+          }
+          .date {
+            font-size: 11px;
+            text-align: end;
+          }
+          .author {
+            font-size: 15px;
           }
         }
       }
