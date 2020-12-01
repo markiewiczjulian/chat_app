@@ -5,7 +5,10 @@ const http = require("http").createServer(app);
 const chatRouter = require("./routes/chatMsg");
 const socketio = require("socket.io");
 const cors = require("cors");
-const port = 4000;
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+const port = process.env.PORT || 4000;
 const { ChatMsg } = require("./models/chatMsg");
 const connect = require("./dbconnect");
 const io = socketio(http);

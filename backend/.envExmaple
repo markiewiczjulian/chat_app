@@ -1,0 +1,8 @@
+
+MONGO_USERNAME = user
+// remember to encode your password so for example "test122!" should look like this "test122%21"
+MONGO_PASSWORD = secretPass
+MONGO_PORT = 27017
+MONGO_DB = chat
+MONGO_HOSTNAME = localhost
+PORT = 5000

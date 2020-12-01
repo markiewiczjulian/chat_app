@@ -4,10 +4,10 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
-  faLaughWink,
   faLaugh,
+  faLaughWink,
   faPaperPlane,
-} from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faLaughWink, faLaugh, faPaperPlane);

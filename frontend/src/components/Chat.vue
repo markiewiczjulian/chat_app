@@ -1,34 +1,48 @@
 <template>
   <div>
-    <div v-for="(message, index) of messages" :key="index">
-      {{ index }}-{{ idToTimestamp(message._id) }}-{{ message }}
-    </div>
-    <div v-show="this.userTypingInfo.length" class="userInfo">
-      {{ this.userTypingInfo }}
-    </div>
-    <div class="inputSection">
-      <span
-        @click="this.toggleEmojiPanel"
-        class="emojiBtn"
-        @mouseover="emojiIcon = 'laugh-wink'"
-        @mouseleave="emojiIcon = 'laugh'"
-      >
-        <font-awesome-icon :icon="emojiIcon" />
-      </span>
-      <VEmojiPicker
-        class="emojiPanel"
-        :class="[emojiPanelOpen ? 'opened' : 'closed']"
-        @select="selectEmoji"
-      />
-      <input
-        @keyup.enter="addNewMsg(message)"
-        v-model="message"
-        type="text"
-        class="inputBox"
-      />
-      <span :disabled="btnDisabled" @click="addNewMsg(message)" class="sendBtn">
-        <font-awesome-icon icon="paper-plane" />
-      </span>
+    <div class="chatContainer">
+      <div class="messagesContainer">
+        <div
+          v-for="(message, index) of messages"
+          :key="index"
+          class="singleMessage"
+        >
+          <div class="text">{{ message.message }}</div>
+          <div class="author">{{ message.sender }}</div>
+          <div class="date">{{ idToTimestamp(message._id) }}</div>
+        </div>
+      </div>
+      <div v-show="this.userTypingInfo.length" class="userInfo">
+        {{ this.userTypingInfo }}
+      </div>
+      <div class="inputSection">
+        <span
+          @click="this.toggleEmojiPanel"
+          class="emojiBtn"
+          @mouseover="emojiIcon = 'laugh-wink'"
+          @mouseleave="emojiIcon = 'laugh'"
+        >
+          <font-awesome-icon :icon="['far', emojiIcon]" />
+        </span>
+        <VEmojiPicker
+          class="emojiPanel"
+          :class="[emojiPanelOpen ? 'opened' : 'closed']"
+          @select="selectEmoji"
+        />
+        <input
+          @keyup.enter="addNewMsg(message)"
+          v-model="message"
+          type="text"
+          class="inputBox"
+        />
+        <span
+          :disabled="btnDisabled"
+          @click="addNewMsg(message)"
+          class="sendBtn"
+        >
+          <font-awesome-icon :icon="['far', 'paper-plane']" />
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -55,10 +69,10 @@
       VEmojiPicker,
     },
     created() {
-      this.socket = io("http://localhost:4000/");
+      this.socket = io("http://localhost:5000/");
     },
     mounted() {
-      this.axios.get("http://localhost:4000/chatRoom").then((res) => {
+      this.axios.get("http://localhost:5000/chatRoom").then((res) => {
         res.data.map((el) => {
           el.message = this.parseEmoji(el.message);
         });
@@ -141,46 +155,100 @@
 </script>
 
 <style lang="scss">
-  .userInfo {
-    color: red;
+  .chatContainer {
+    width: 100%;
+    margin: auto;
+    .messagesContainer {
+      overflow-y: scroll;
+      overflow-x: hidden;
+      height: calc(100vh - 100px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .singleMessage {
+        background-color: lightgrey;
+        padding: 10px;
+        border-radius: 50px;
+        margin: 20px 0;
+        width: 80%;
+      }
+    }
+    .userInfo {
+      color: red;
+    }
+    .inputSection {
+      display: flex;
+      position: relative;
+      height: 50px;
+      justify-content: space-evenly;
+      border: 3px solid grey;
+      border-radius: 10px;
+      box-shadow: 2px 2px 7px 0px black;
+      .inputBox {
+        width: 90%;
+        border: none;
+        outline: none;
+        font-size: 20px;
+        &:focus {
+          outline: none;
+        }
+      }
+      .sendBtn {
+        cursor: pointer;
+        color: gray;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        &:hover {
+          animation: shake-animation 0.82s both;
+          transform: translate3d(0, 0, 0);
+        }
+        svg {
+          font-size: 40px;
+        }
+      }
+      .emojiBtn {
+        cursor: pointer;
+        color: gray;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        &:hover {
+          transform: rotate(0deg);
+          animation: rotate-animation 0.82s infinite;
+        }
+        svg {
+          font-size: 40px;
+        }
+      }
+      .emojiPanel {
+        position: absolute;
+        bottom: 50px;
+        left: 0;
+        transition: all 0.3s ease-in-out;
+        &.opened {
+          opacity: 1;
+        }
+        &.closed {
+          opacity: 0;
+          height: 0;
+        }
+      }
+    }
   }
-  .inputSection {
-    display: flex;
-    position: relative;
-    .inputBox {
-      width: 100%;
-    }
-    .sendBtn {
-      cursor: pointer;
-      &:hover {
-        animation: shake-animation 0.82s both;
-        transform: translate3d(0, 0, 0);
-      }
-      svg {
-        font-size: 40px;
+
+  @media screen and (min-width: 1200px) {
+    .chatContainer {
+      width: 80%;
+      .messagesContainer .singleMessage {
+        width: 60%;
       }
     }
-    .emojiBtn {
-      cursor: pointer;
-      &:hover {
-        transform: rotate(0deg);
-        animation: rotate-animation 0.82s infinite;
-      }
-      svg {
-        font-size: 40px;
-      }
-    }
-    .emojiPanel {
-      position: absolute;
-      bottom: 45px;
-      transition: all 0.3s ease-in-out;
-      &.opened {
-        opacity: 1;
-      }
-      &.closed {
-        opacity: 0;
-        height: 0;
-      }
+  }
+
+  @media screen and (min-width: 1500px) {
+    .chatContainer {
+      width: 60%;
     }
   }
 
