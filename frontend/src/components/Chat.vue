@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="chatContainer">
+      <div class="loggedInUser">
+        {{ currUserName }}
+      </div>
       <div class="messagesContainer">
         <div
           v-for="(message, index) of messages"
@@ -17,7 +20,7 @@
       </div>
       <div class="inputSection">
         <span
-          @click="this.toggleEmojiPanel"
+          @click="toggleEmojiPanel"
           class="emojiBtn"
           @mouseover="emojiIcon = 'laugh-wink'"
           @mouseleave="emojiIcon = 'laugh'"
@@ -52,6 +55,7 @@
   import objectIdToTimestamp from "objectid-to-timestamp";
   import emoji from "node-emoji";
   import { VEmojiPicker } from "v-emoji-picker";
+  import { Auth } from 'aws-amplify';
 
   export default {
     name: "Chat",
@@ -62,7 +66,8 @@
         message: "",
         userTypingInfo: "",
         emojiPanelOpen: false,
-        emojiIcon: "laugh"
+        emojiIcon: "laugh",
+        currUserName: ""
       };
     },
     components: {
@@ -94,6 +99,7 @@
         console.log("TYPING");
         this.userTypingInfo = `${user} is typing right now...`;
       });
+      this.getCurrUser();
     },
     watch: {
       message() {
@@ -116,6 +122,14 @@
       },
     },
     methods: {
+      async getCurrUser() {
+        try {
+          const user = await Auth.currentUserInfo();
+          this.currUserName = user.attributes.email;
+        } catch (error) {
+          console.log('error signing up:', error);
+        }
+      },
       toggleEmojiPanel() {
         this.emojiPanelOpen = !this.emojiPanelOpen;
       },
@@ -130,13 +144,12 @@
       },
       addNewMsg(msg) {
         if (!this.btnDisabled) {
-          this.socket.emit("addedMessage", this.unparseEmoji(msg));
+          this.socket.emit("addedMessage", this.unparseEmoji(msg), this.currUserName);
           this.message = "";
           this.emojiPanelOpen = false;
         }
       },
       idToTimestamp(id) {
-        //   toLocaleString powinno zadziałać z pudełka bez żadnego łątania stringami
         const date = new Date(objectIdToTimestamp(id));
         return `${date.getDate()}-${date.getMonth() +
           1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
@@ -156,8 +169,13 @@
 
 <style lang="scss">
   .chatContainer {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
     width: 100%;
     margin: auto;
+    .loggedInUser {
+      color: black;
+    }
     .messagesContainer {
       overflow-y: scroll;
       overflow-x: hidden;
@@ -167,10 +185,17 @@
       align-items: center;
       .singleMessage {
         background-color: lightgrey;
-        padding: 10px;
+        padding: 20px;
         border-radius: 50px;
         margin: 20px 0;
         width: 80%;
+        .text {
+          overflow-wrap: anywhere;
+          font-size: 18px;
+        }
+        .date {
+          font-size: 12px;
+        }
       }
     }
     .userInfo {

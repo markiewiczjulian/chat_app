@@ -1,7 +1,10 @@
 <template>
-  <div id="app">
-    <Chat />
-  </div>
+  <amplify-authenticator>
+    <div>
+      <amplify-sign-out></amplify-sign-out>
+      <Chat />
+    </div>
+  </amplify-authenticator>
 </template>
 
 <script>
@@ -15,5 +18,8 @@
   };
 </script>
 
-<style>
+<style lang="scss">
+  amplify-button.hydrated .button {
+    background-color: red;
+  }
 </style>

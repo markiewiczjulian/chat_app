@@ -31,12 +31,12 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("notifyStopTyping", data);
   });
 
-  socket.on("addedMessage", (msg) => {
+  socket.on("addedMessage", (msg, sender) => {
     console.log("message: " + msg);
 
     connect.then((db) => {
       console.log("connected correctly to the server");
-      let chatMessage = new ChatMsg({ message: msg, sender: "Anonymous" });
+      let chatMessage = new ChatMsg({ message: msg, sender: sender || "Anonymous" });
 
       chatMessage.save();
       io.emit("receivedMessage", chatMessage);
