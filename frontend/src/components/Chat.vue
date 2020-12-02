@@ -14,7 +14,7 @@
           ]"
         >
           <div class="authorAvatar">
-            <img src="../assets/avatars/man/5.svg" alt="" />
+            <img src="../assets/avatars/5.svg" alt="" />
           </div>
           <div class="content">
             <span class="author">
@@ -195,15 +195,15 @@
       flex-direction: column;
       .singleMessage {
         &.loggedUserMsg {
-          align-self: flex-end;
           background-color: $melon;
         }
-        align-self: flex-start;
+        flex-direction: column;
+        align-self: center;
         background-color: $powder-blue;
         padding: 20px;
         border-radius: 50px;
         margin: 20px 0;
-        width: 80%;
+        width: 90%;
         display: flex;
         .authorAvatar {
           margin-right: 20px;
@@ -294,6 +294,19 @@
         &.closed {
           opacity: 0;
           height: 0;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 600px) {
+    .chatContainer {
+      .messagesContainer .singleMessage {
+        width: 80%;
+        align-self: flex-start;
+        flex-direction: row;
+        &.loggedUserMsg {
+          align-self: flex-end;
         }
       }
     }
