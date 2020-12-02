@@ -14,7 +14,7 @@
           ]"
         >
           <div class="authorAvatar">
-            <img src="../assets/avatars/5.svg" alt="" />
+            <img src="../assets/avatars/9.svg" alt="" />
           </div>
           <div class="content">
             <span class="author">
