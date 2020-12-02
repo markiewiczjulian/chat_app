@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import "@/mixins/emojiMixin";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faLaugh,
@@ -10,8 +11,9 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Amplify, { Auth } from "aws-amplify";
-import awsconfig from "./aws-exports";
 import "@aws-amplify/ui-vue";
+import awsconfig from "./aws-exports";
+import router from "./router";
 
 Amplify.configure(awsconfig);
 library.add(faLaughWink, faLaugh, faPaperPlane);
@@ -20,5 +22,6 @@ Vue.config.productionTip = false;
 Vue.use(VueAxios, axios, Auth);
 
 new Vue({
+  router,
   render: (h) => h(App),
 }).$mount("#app");

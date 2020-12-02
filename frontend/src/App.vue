@@ -1,22 +1,33 @@
 <template>
-  <amplify-authenticator>
-    <div>
-      <amplify-sign-out></amplify-sign-out>
-      <Chat />
+  <div id="app">
+    <div id="nav">
+      <router-link to="/">Chat room</router-link> |
+      <router-link to="/login">Login</router-link>
     </div>
-  </amplify-authenticator>
+    <router-view />
+  </div>
 </template>
 
-<script>
-  import Chat from "./components/Chat.vue";
-
-  export default {
-    name: "App",
-    components: {
-      Chat,
-    },
-  };
-</script>
-
 <style lang="scss">
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    #nav {
+      height: 20%;
+      a {
+        font-weight: bold;
+        color: #2c3e50;
+
+        &.router-link-exact-active {
+          color: #42b983;
+        }
+      }
+    }
+  }
 </style>
