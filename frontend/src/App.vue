@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Chat room</router-link> |
-      <router-link to="/login">Login</router-link>
-    </div>
     <router-view />
   </div>
 </template>
@@ -15,19 +11,12 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    height: 90vh;
+    height: 99vh;
     display: flex;
     flex-direction: column;
-    #nav {
-      height: 20%;
-      a {
-        font-weight: bold;
-        color: #2c3e50;
-
-        &.router-link-exact-active {
-          color: #42b983;
-        }
-      }
-    }
+  }
+  body {
+    margin: 0;
+    padding: 0;
   }
 </style>

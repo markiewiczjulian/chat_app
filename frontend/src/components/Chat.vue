@@ -1,8 +1,5 @@
 <template>
   <div class="chatContainer">
-    <div class="loggedInUser">
-      {{ currUserName }}
-    </div>
     <div class="messagesContainer">
       <SingleMessage
         v-for="(message, index) of messages"
@@ -25,7 +22,6 @@
 
 <script>
   import io from "socket.io-client";
-  import { Auth } from 'aws-amplify';
   import SingleMessage from './SingleMessage.vue';
   import InputSection from './InputSection';
   export default {
@@ -43,10 +39,10 @@
       InputSection
     },
     created() {
-      this.socket = io("http://localhost:5000/");
+      this.socket = io("http://localhost:5001/");
     },
     mounted() {
-      this.axios.get("http://localhost:5000/chatRoom").then((res) => {
+      this.axios.get("http://localhost:5001/chatRoom").then((res) => {
         res.data.map((el) => {
           el.message = this.parseEmoji(el.message);
         });
@@ -68,24 +64,18 @@
         console.log("TYPING");
         this.userTypingInfo = `${user} is typing right now...`;
       });
-      this.getCurrUser();
     },
     methods: {
-      async getCurrUser() {
-        try {
-          const user = await Auth.currentUserInfo();
-          this.currUserName = user.attributes.email;
-        } catch (error) {
-          console.log('error signing up:', error);
-        }
-      },
       sendMessage(message) {
+        // add current user name to the store and get here
         this.socket.emit("addedMessage", message, this.currUserName);
       },
       emitTypingInfo(event) {
         if (event) {
+          // add current user name to the store and get here
           this.socket.emit("typing", this.currUserName);
         } else {
+          // add current user name to the store and get here
           this.socket.emit("stoppedTyping", this.currUserName);
         }
       }
@@ -95,13 +85,13 @@
 
 <style lang="scss">
   .chatContainer {
-    height: 100%;
-    .loggedInUser {
-      // TODO
-      color: $black;
-      position: absolute;
-      top: 20px;
-    }
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    padding-bottom: 10px;
+    // TODO
     .messagesContainer {
       padding: 0 20px;
       overflow-y: scroll;
@@ -115,6 +105,18 @@
       bottom: 0;
       width: 100%;
       color: red;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .chatContainer {
+      width: 80%;
+    }
+  }
+
+  @media screen and (min-width: 1500px) {
+    .chatContainer {
+      width: 60%;
     }
   }
 </style>

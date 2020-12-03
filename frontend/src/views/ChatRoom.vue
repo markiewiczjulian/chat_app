@@ -1,37 +1,28 @@
 <template>
   <div class="chat">
+    <Navbar />
     <Chat />
   </div>
 </template>
 
 <script>
-  import Chat from '@/components/Chat.vue';
+  import Chat from '@/components/Chat';
+  import Navbar from '@/components/Navbar';
   export default {
     name: 'ChatRoom',
     components:
     {
-      Chat
+      Chat, Navbar
     }
   }
 </script>
 <style lang="scss" scoped>
   .chat {
     width: 100%;
-    height: 80%;
+    height: 100%;
     position: relative;
     display: flex;
+    flex-direction: column;
     align-self: center;
-  }
-
-  @media screen and (min-width: 1200px) {
-    .chat {
-      width: 80%;
-    }
-  }
-
-  @media screen and (min-width: 1500px) {
-    .chat {
-      width: 60%;
-    }
   }
 </style>
