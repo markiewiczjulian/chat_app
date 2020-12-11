@@ -86,7 +86,7 @@
     }
   }
 
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: $breakpoint-s) {
     .singleMessage {
       width: 80%;
       align-self: flex-start;
@@ -96,7 +96,7 @@
       }
     }
   }
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: $breakpoint-xl) {
     .singleMessage {
       width: 60%;
     }

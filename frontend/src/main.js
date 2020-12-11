@@ -10,7 +10,8 @@ import {
   faPaperPlane,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import Amplify, { Auth } from "aws-amplify";
+import Vuelidate from "vuelidate";
+import Amplify from "aws-amplify";
 import "@aws-amplify/ui-vue";
 import awsconfig from "./aws-exports";
 import router from "./router";
@@ -19,7 +20,7 @@ Amplify.configure(awsconfig);
 library.add(faLaughWink, faLaugh, faPaperPlane);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
-Vue.use(VueAxios, axios, Auth);
+[[VueAxios, axios], [Vuelidate]].forEach((args) => Vue.use(...args));
 
 new Vue({
   router,

@@ -1,4 +1,4 @@
-/* SCSS HEX */
+// colors
 $melon: #ffa69eff;
 $eggshell: #faf3ddff;
 $aero-blue: #b8f2e6ff;
@@ -6,3 +6,10 @@ $powder-blue: #aed9e0ff;
 $black-coral: #5e6472ff;
 $white: #ffff;
 $black: #000;
+
+// breakpoints
+$breakpoint-s: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1600px;

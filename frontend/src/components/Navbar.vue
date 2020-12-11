@@ -1,10 +1,13 @@
 <template>
   <div class="navbar">
-    <router-link to="/">Chat room</router-link> |
-    <router-link to="/login">Login</router-link>
-    <div class="loggedInUser">
+    <div class="loggedUserSection">
       {{ currUserName }}
     </div>
+    <div class="routesSection">
+      <router-link to="/">Chat room</router-link> |
+      <router-link to="/login">Login</router-link>
+    </div>
+    <div class="logOutBtn">log out</div>
   </div>
 </template>
 
@@ -34,12 +37,16 @@
     },
   }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
   .navbar {
     height: 20%;
     background-color: lightgreen;
     overflow-x: hidden;
-    .loggedInUser {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .loggedUserSection {
       color: $black;
     }
     a {
@@ -49,6 +56,14 @@
       &.router-link-exact-active {
         color: #42b983;
       }
+    }
+    .routesSection {
+    }
+    .logOutBtn {
+      display: flex;
+      cursor: pointer;
+      border: 1px $black solid;
+      justify-self: center;
     }
   }
 </style>
