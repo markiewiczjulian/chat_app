@@ -1,15 +1,22 @@
 <template>
   <form @submit.prevent="loginUser">
     <h3>Sign in</h3>
-    <div class="loginForm">
+    <div class="form login">
       <div
         class="formGroup"
-        :class="{ 'formGroup--error': $v.user.name.$error }"
+        :class="[
+          {
+            'formGroup--error': $v.user.name.$error,
+          },
+          {
+            'formGroup--success': !$v.user.name.$error && $v.user.name.$dirty,
+          },
+        ]"
       >
-        <label class="form__label">e-mail</label>
+        <label class="label">e-mail</label>
         <input
-          placeholder="enter your e-mail"
-          class="form__input"
+          class="input"
+          type="text"
           @blur="!$v.user.name.$touch()"
           v-model.trim="$v.user.name.$model"
         />
@@ -24,12 +31,19 @@
       </div>
       <div
         class="formGroup"
-        :class="{ 'formGroup--error': $v.user.password.$error }"
+        :class="[
+          {
+            'formGroup--error': $v.user.password.$error,
+          },
+          {
+            'formGroup--success':
+              !$v.user.password.$error && $v.user.password.$dirty,
+          },
+        ]"
       >
-        <label class="form__label">password</label>
+        <label class="label">password</label>
         <input
-          placeholder="enter your password"
-          class="form__input"
+          class="input"
           type="password"
           @blur="!$v.user.password.$touch()"
           v-model.trim="$v.user.password.$model"
@@ -59,7 +73,9 @@
         </template>
       </div>
       <div class="error" v-if="$v.user.$anyError">Form is invalid.</div>
-      <button :disabled="$v.user.$anyError" type="submit">submit</button>
+      <button class="submitBtn" :disabled="$v.user.$anyError" type="submit">
+        submit
+      </button>
     </div>
   </form>
 </template>
@@ -109,37 +125,4 @@
     },
   }
 </script>
-<style lang="scss" scoped>
-  .loginForm {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: auto;
-    .formGroup {
-      display: flex;
-      flex-direction: column;
-      border: 1px solid green;
-      .phoneInput {
-        display: flex;
-        input {
-          width: 100%;
-          margin-left: 10px;
-        }
-      }
-      &--error {
-        background: red;
-      }
-    }
-  }
-
-  @media screen and (min-width: $breakpoint-s) {
-    .loginForm {
-      width: 60%;
-    }
-  }
-  @media screen and (min-width: $breakpoint-lg) {
-    .loginForm {
-      width: 40%;
-    }
-  }
-</style>
+<style lang="scss" scoped></style>

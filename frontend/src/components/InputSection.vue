@@ -99,7 +99,7 @@
       width: 90%;
       border: none;
       outline: none;
-      font-size: 20px;
+      font-size: $font-size-xl;
       &:focus {
         outline: none;
       }
@@ -115,7 +115,7 @@
         transform: translate3d(0, 0, 0);
       }
       svg {
-        font-size: 40px;
+        font-size: $font-size-xxl;
       }
     }
     .emojiBtn {
@@ -129,7 +129,7 @@
         animation: rotate-animation 0.82s infinite;
       }
       svg {
-        font-size: 40px;
+        font-size: $font-size-xxl;
       }
     }
     .emojiPanel {

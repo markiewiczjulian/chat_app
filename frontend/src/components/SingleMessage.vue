@@ -73,15 +73,15 @@
       text-align: left;
       .text {
         overflow-wrap: anywhere;
-        font-size: 18px;
+        font-size: $font-size-lg;
         margin: 10px 0;
       }
       .date {
-        font-size: 11px;
+        font-size: $font-size-xs;
         text-align: end;
       }
       .author {
-        font-size: 15px;
+        font-size: $font-size-md;
       }
     }
   }

@@ -2,14 +2,22 @@
   <div>
     <form @submit.prevent="registerUser">
       <h3>Sign up</h3>
-      <div class="registerForm">
+      <div class="form register">
         <div
           class="formGroup"
-          :class="{ 'formGroup--error': $v.user.name.$error }"
+          :class="[
+            {
+              'formGroup--error': $v.user.name.$error,
+            },
+            {
+              'formGroup--success': !$v.user.name.$error && $v.user.name.$dirty,
+            },
+          ]"
         >
-          <label class="form__label">e-mail</label>
+          <label class="label">e-mail</label>
           <input
-            class="form__input"
+            class="input"
+            type="text"
             @blur="!$v.user.name.$touch()"
             v-model.trim="$v.user.name.$model"
           />
@@ -24,11 +32,19 @@
         </div>
         <div
           class="formGroup"
-          :class="{ 'formGroup--error': $v.user.password.$error }"
+          :class="[
+            {
+              'formGroup--error': $v.user.password.$error,
+            },
+            {
+              'formGroup--success':
+                !$v.user.password.$error && $v.user.password.$dirty,
+            },
+          ]"
         >
-          <label class="form__label">password</label>
+          <label class="label">password</label>
           <input
-            class="form__input"
+            class="input"
             type="password"
             @blur="!$v.user.password.$touch()"
             v-model.trim="$v.user.password.$model"
@@ -59,12 +75,21 @@
         </div>
         <div
           class="formGroup"
-          :class="{
-            'formGroup--error':
-              $v.user.phone.number.$error || $v.user.phone.countryCode.$error,
-          }"
+          :class="[
+            {
+              'formGroup--error':
+                $v.user.phone.number.$error || $v.user.phone.countryCode.$error,
+            },
+            {
+              'formGroup--success':
+                !$v.user.phone.number.$error &&
+                $v.user.phone.number.$dirty &&
+                !$v.user.phone.countryCode.$error &&
+                $v.user.phone.countryCode.$dirty,
+            },
+          ]"
         >
-          <label class="form__label">phone number</label>
+          <label class="label">phone number</label>
           <div class="phoneInput">
             <select
               v-model="$v.user.phone.countryCode.$model"
@@ -80,7 +105,7 @@
               </option>
             </select>
             <input
-              class="form__input"
+              class="input"
               type="text"
               @blur="
                 !$v.user.phone.number.$touch();
@@ -100,7 +125,7 @@
             </p>
             <p
               v-if="
-                !$v.user.phone.number.numberic &&
+                !$v.user.phone.number.numeric &&
                 !$v.user.phone.countryCode.$error
               "
               class="errorMessage"
@@ -117,6 +142,7 @@
         </div>
         <div class="error" v-if="$v.user.$anyError">Form is invalid.</div>
         <button
+          class="submitBtn"
           :disabled="
             $v.user.$anyError || !$v.user.$anyDirty || $v.user.$invalid
           "
@@ -195,36 +221,11 @@
 </script>
 
 <style lang="scss" scoped>
-  .registerForm {
+  .register .formGroup .phoneInput {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: auto;
-    .formGroup {
-      display: flex;
-      flex-direction: column;
-      border: 1px solid green;
-      .phoneInput {
-        display: flex;
-        input {
-          width: 100%;
-          margin-left: 10px;
-        }
-      }
-      &--error {
-        background: red;
-      }
-    }
-  }
-
-  @media screen and (min-width: $breakpoint-s) {
-    .registerForm {
-      width: 60%;
-    }
-  }
-  @media screen and (min-width: $breakpoint-lg) {
-    .registerForm {
-      width: 40%;
+    .input {
+      width: 100%;
+      margin-left: 10px;
     }
   }
 </style>
