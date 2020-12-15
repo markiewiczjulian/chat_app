@@ -2,7 +2,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import ConfirmRegister from "../views/ConfirmRegister.vue";
 import ChatRoom from "../views/ChatRoom.vue";
+import ErrorPage from "../views/Error.vue";
 
 Vue.use(VueRouter);
 
@@ -18,9 +20,19 @@ const routes = [
     component: Register,
   },
   {
+    path: "/confirm-register",
+    name: "ConfirmRegister",
+    component: ConfirmRegister,
+  },
+  {
     path: "/",
     name: "ChatRoom",
     component: ChatRoom,
+  },
+  {
+    path: "*",
+    name: "ErrorPage",
+    component: ErrorPage,
   },
 ];
 

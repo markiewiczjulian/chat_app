@@ -15,6 +15,7 @@ import Amplify from "aws-amplify";
 import "@aws-amplify/ui-vue";
 import awsconfig from "./aws-exports";
 import router from "./router";
+import store from "./store";
 
 Amplify.configure(awsconfig);
 library.add(faLaughWink, faLaugh, faPaperPlane);
@@ -24,5 +25,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store,
   render: (h) => h(App),
 }).$mount("#app");

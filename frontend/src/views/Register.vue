@@ -3,6 +3,10 @@
     <form @submit.prevent="registerUser">
       <h3>Sign up</h3>
       <div class="form register">
+        <p class="additionalInfo">
+          If you already have an account in our service please go
+          <router-link to="/login">here</router-link> to sign in
+        </p>
         <div
           class="formGroup"
           :class="[
@@ -148,7 +152,7 @@
           "
           type="submit"
         >
-          submit
+          sign up
         </button>
       </div>
     </form>
@@ -157,8 +161,9 @@
 
 <script>
   import { Auth } from 'aws-amplify';
-  const countriesData = require('../assets/constants/countryCodes');
   import { required, alphaNum, email, numeric, minLength } from "vuelidate/lib/validators";
+  import { mapActions } from 'vuex';
+  const countriesData = require('../assets/constants/countryCodes');
 
   const mustContainAtLeastOneNum = (value) => /\d/.test(value);
   const mustContainAtLeastOneLet = (value) => /[a-zA-Z]/.test(value);
@@ -168,17 +173,13 @@
     data() {
       return {
         user: {
-          name: "",
-          password: "",
-          phone: {
-            countryCode: "",
-            number: ""
-          }
+
         },
       }
     },
     created() {
       this.countryCodes = countriesData;
+      this.user = this.createEmptyUserObj();
     },
     validations: {
       user: {
@@ -194,27 +195,39 @@
       },
     },
     methods: {
+      ...mapActions({ setCurrUser: "user/setCurrentUser" }),
       async registerUser() {
-        console.log(this.user)
         if (this.user) {
           const newUser = {
             username: this.user.name,
             password: this.user.password,
             attributes: {
               email: this.user.name,
-              // phone_number: `${this.user.phone.countryCode} ${this.user.phone.number}`,
               phone_number: `+${this.user.phone.countryCode}${this.user.phone.number}`,
             }
           }
           try {
-            console.log(newUser)
-            console.log(Auth)
-            const { userResult } = await Auth.signUp(newUser);
-            console.log(userResult);
+            await Auth.signUp(newUser);
+            this.setCurrUser(this.user.name);
+            this.user = this.createEmptyUserObj();
+            this.$router.push('/confirm-register');
           } catch (error) {
+            this.user = this.createEmptyUserObj();
+            this.$v.$reset();
             console.log('error signing up:', error);
+            alert('error signing up:', error);
           }
         }
+      },
+      createEmptyUserObj() {
+        return {
+          name: "",
+          password: "",
+          phone: {
+            countryCode: "",
+            number: ""
+          }
+        };
       }
     },
   }

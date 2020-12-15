@@ -3,12 +3,21 @@
   flex-direction: column;
   width: 95%;
   margin: auto;
+  .additionalInfo {
+    font-size: $font-size-s;
+    margin-bottom: 20px;
+    a {
+      cursor: pointer;
+      text-decoration: none;
+      color: $blue;
+    }
+  }
   .submitBtn {
     width: 100%;
     background-color: $blue;
     color: $white;
     padding: 14px 20px;
-    margin: 8px 0;
+    margin: 15px 0;
     border: none;
     border-radius: 4px;
     font-size: $font-size-md;

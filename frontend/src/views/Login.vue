@@ -2,6 +2,10 @@
   <form @submit.prevent="loginUser">
     <h3>Sign in</h3>
     <div class="form login">
+      <p class="additionalInfo">
+        If you don't have an account in our service please go
+        <router-link to="/register">here</router-link> to sign up
+      </p>
       <div
         class="formGroup"
         :class="[
@@ -74,7 +78,7 @@
       </div>
       <div class="error" v-if="$v.user.$anyError">Form is invalid.</div>
       <button class="submitBtn" :disabled="$v.user.$anyError" type="submit">
-        submit
+        sign in
       </button>
     </div>
   </form>
@@ -82,6 +86,7 @@
 <script>
   import { Auth } from 'aws-amplify';
   import { required, alphaNum, email, minLength } from "vuelidate/lib/validators";
+  import { mapActions } from 'vuex'
 
   const mustContainAtLeastOneNum = (value) => /\d/.test(value);
   const mustContainAtLeastOneLet = (value) => /[a-zA-Z]/.test(value);
@@ -91,10 +96,11 @@
     data() {
       return {
         user: {
-          name: "",
-          password: ""
         },
       }
+    },
+    created() {
+      this.user = this.createEmptyUserObj();
     },
     validations: {
       user: {
@@ -106,21 +112,28 @@
       },
     },
     methods: {
+      ...mapActions({ setCurrUser: "user/setCurrentUser" }),
       async loginUser() {
-        console.log(this.user)
         if (this.user) {
           const user = {
             username: this.user.name,
             password: this.user.password,
           }
           try {
-            console.log(user);
-            const { userResult } = await Auth.signIn(user);
-            console.log(userResult);
+            await Auth.signIn(user);
+            this.setCurrUser(this.user.name);
+            this.user = this.createEmptyUserObj();
+            this.$router.push('/');
           } catch (error) {
+            this.user = this.createEmptyUserObj();
+            this.$v.$reset();
             console.log('error signing in:', error);
+            alert('error signing in:', error);
           }
         }
+      },
+      createEmptyUserObj() {
+        return { name: "", password: "" };
       }
     },
   }

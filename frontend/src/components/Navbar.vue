@@ -7,11 +7,12 @@
       <router-link to="/">Chat room</router-link> |
       <router-link to="/login">Login</router-link>
     </div>
-    <div class="logOutBtn">log out</div>
+    <div class="logOutBtn" @click="logOut">log out</div>
   </div>
 </template>
 
 <script>
+  import { mapActions, mapGetters } from 'vuex';
   import { Auth } from 'aws-amplify';
 
   export default {
@@ -22,16 +23,18 @@
       }
     },
     created() {
-      this.getCurrUser();
+      this.currUserName = this.getCurrentUser();
     },
     methods: {
-      async getCurrUser() {
-        // add current user name to the store and just get here
+      ...mapGetters({ getCurrentUser: 'user/getCurrentUser' }),
+      ...mapActions({ removeCurrentUser: 'user/removeCurrentUser' }),
+      async logOut() {
         try {
-          const user = await Auth.currentUserInfo();
-          this.currUserName = user.attributes.email;
+          await Auth.signOut();
+          this.removeCurrentUser();
+          this.$router.push('/login');
         } catch (error) {
-          console.log('error signing up:', error);
+          console.log('error signing out: ', error);
         }
       }
     },

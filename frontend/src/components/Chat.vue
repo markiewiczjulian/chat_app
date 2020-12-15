@@ -24,6 +24,8 @@
   import io from "socket.io-client";
   import SingleMessage from './SingleMessage.vue';
   import InputSection from './InputSection';
+  import { mapGetters } from 'vuex';
+
   export default {
     name: "Chat",
     data() {
@@ -40,6 +42,7 @@
     },
     created() {
       this.socket = io("http://localhost:5002/");
+      this.currUserName = this.getCurrentUser();
     },
     mounted() {
       this.axios.get("http://localhost:5002/chatRoom").then((res) => {
@@ -66,6 +69,7 @@
       });
     },
     methods: {
+      ...mapGetters({ getCurrentUser: 'user/getCurrentUser' }),
       sendMessage(message) {
         // add current user name to the store and get here
         this.socket.emit("addedMessage", message, this.currUserName);
