@@ -16,12 +16,15 @@ import "@aws-amplify/ui-vue";
 import awsconfig from "./aws-exports";
 import router from "./router";
 import store from "./store";
+import Notifications from "vue-notification";
 
 Amplify.configure(awsconfig);
 library.add(faLaughWink, faLaugh, faPaperPlane);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
-[[VueAxios, axios], [Vuelidate]].forEach((args) => Vue.use(...args));
+[[VueAxios, axios], [Vuelidate], [Notifications]].forEach((args) =>
+  Vue.use(...args),
+);
 
 new Vue({
   router,

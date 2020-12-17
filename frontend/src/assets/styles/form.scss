@@ -54,6 +54,7 @@
       .input[type="text"],
       .input[type="password"],
       select {
+        animation: shake-animation 0.82s both;
         border: 1px solid $red;
       }
     }

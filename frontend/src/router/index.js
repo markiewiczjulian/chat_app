@@ -1,8 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "../views/Login.vue";
-import Register from "../views/Register.vue";
-import ConfirmRegister from "../views/ConfirmRegister.vue";
+import Login from "../views/authorization/Login.vue";
+import Register from "../views/authorization/Register.vue";
+import ConfirmRegister from "../views/authorization/ConfirmRegister.vue";
+import ResendConfirmation from "../views/authorization/ResendConfirmation.vue";
 import ChatRoom from "../views/ChatRoom.vue";
 import ErrorPage from "../views/Error.vue";
 
@@ -23,6 +24,11 @@ const routes = [
     path: "/confirm-register",
     name: "ConfirmRegister",
     component: ConfirmRegister,
+  },
+  {
+    path: "/resend-confirmation",
+    name: "ResendConfirmation",
+    component: ResendConfirmation,
   },
   {
     path: "/",
