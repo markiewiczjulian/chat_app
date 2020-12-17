@@ -1,13 +1,11 @@
 <template>
   <div class="navbar">
-    <div class="loggedUserSection">
-      {{ currUserName }}
+    <div class="content">
+      <div class="loggedUserSection">
+        {{ currUserName }}
+      </div>
+      <div class="logOutBtn" @click="logOut">log out</div>
     </div>
-    <div class="routesSection">
-      <router-link to="/">Chat room</router-link> |
-      <router-link to="/login">Login</router-link>
-    </div>
-    <div class="logOutBtn" @click="logOut">log out</div>
   </div>
 </template>
 
@@ -43,30 +41,29 @@
 <style lang="scss">
   .navbar {
     height: 20%;
-    background-color: lightgreen;
+    background-color: $melon;
     overflow-x: hidden;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    .loggedUserSection {
-      color: $black;
-    }
-    a {
-      font-weight: bold;
-      color: #2c3e50;
-
-      &.router-link-exact-active {
-        color: #42b983;
-      }
-    }
-    .routesSection {
-    }
-    .logOutBtn {
+    justify-content: center;
+    z-index: 2;
+    box-shadow: 0 5px 10px $black-coral;
+    color: $white;
+    .content {
+      height: 100%;
+      width: 100%;
+      max-width: 1200px;
       display: flex;
-      cursor: pointer;
-      border: 1px $black solid;
-      justify-self: center;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      .loggedUserSection {
+      }
+      .logOutBtn {
+        display: flex;
+        cursor: pointer;
+        border: 1px $black solid;
+        justify-self: center;
+      }
     }
   }
 </style>
