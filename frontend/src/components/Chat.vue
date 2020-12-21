@@ -89,7 +89,8 @@
 
 <style lang="scss">
   .chatContainer {
-    height: 80%;
+    max-width: 1200px;
+    height: 85%;
     width: 100%;
     display: flex;
     flex-direction: column;

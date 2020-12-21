@@ -2,9 +2,14 @@
   <div class="navbar">
     <div class="content">
       <div class="loggedUserSection">
-        {{ currUserName }}
+        <img src="../assets/avatars/19.svg" alt="" class="avatar" />
+        <p class="name">{{ currUserName }}</p>
       </div>
-      <div class="logOutBtn" @click="logOut">log out</div>
+      <font-awesome-icon
+        class="logOutBtn"
+        @click="logOut"
+        :icon="['fas', 'power-off']"
+      />
     </div>
   </div>
 </template>
@@ -40,8 +45,8 @@
 </script>
 <style lang="scss">
   .navbar {
-    height: 20%;
-    background-color: $melon;
+    height: 15%;
+    background-color: $powder-blue;
     overflow-x: hidden;
     display: flex;
     justify-content: center;
@@ -49,6 +54,7 @@
     box-shadow: 0 5px 10px $black-coral;
     color: $white;
     .content {
+      padding: 0 10px;
       height: 100%;
       width: 100%;
       max-width: 1200px;
@@ -57,13 +63,35 @@
       align-items: center;
       justify-content: space-between;
       .loggedUserSection {
+        display: flex;
+        align-items: center;
+        .avatar {
+          height: 13vh;
+          background-color: $white;
+          border-radius: 100%;
+          box-shadow: 3px 3px 10px $black;
+        }
+        .name {
+          display: none;
+          font-size: $font-size-lg;
+          margin-left: 10px;
+        }
       }
       .logOutBtn {
+        animation: pulse 2s infinite;
+        font-size: $font-size-xxl;
         display: flex;
         cursor: pointer;
-        border: 1px $black solid;
         justify-self: center;
+        &:hover {
+          animation-play-state: paused;
+        }
       }
+    }
+  }
+  @media screen and (min-width: $breakpoint-s) {
+    .navbar .content .loggedUserSection .name {
+      display: flex;
     }
   }
 </style>

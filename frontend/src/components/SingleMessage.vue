@@ -62,7 +62,7 @@
         height: 80px;
         background-color: $white;
         box-shadow: 3px 3px 10px $black;
-        border-radius: 40px;
+        border-radius: 100%;
       }
     }
     .content {

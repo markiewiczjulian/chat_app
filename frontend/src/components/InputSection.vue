@@ -68,6 +68,16 @@
           this.$emit("sendMsg", this.unparseEmoji(msg));
           this.message = "";
           this.emojiPanelOpen = false;
+          this.scrollToBottom();
+        }
+      },
+      scrollToBottom() {
+        let messagesContainer = document.getElementsByClassName("messagesContainer");
+        console.log(messagesContainer);
+        if (messagesContainer.length) {
+          setTimeout(() => {
+            messagesContainer[ 0 ].scrollTop = messagesContainer[ 0 ].scrollHeight - messagesContainer[ 0 ].clientHeight;
+          }, 100);
         }
       },
       toggleEmojiPanel() {

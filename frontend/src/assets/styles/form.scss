@@ -25,7 +25,7 @@
     }
     .submitBtn {
       width: 100%;
-      background-color: $blue;
+      background-color: $green;
       color: $white;
       padding: 14px 20px;
       margin: 15px 0;
@@ -40,7 +40,7 @@
         pointer-events: none;
       }
       &:hover {
-        background-color: $powder-blue;
+        background-color: $light-green;
       }
     }
     .formGroup {
@@ -106,7 +106,7 @@
 
 @media screen and (min-width: $breakpoint-s) {
   .form {
-    background-color: $blue;
+    background-color: $powder-blue;
     .container {
       width: 60%;
       box-shadow: 2px 2px 10px $black-coral;
