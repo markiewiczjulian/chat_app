@@ -1,65 +1,65 @@
 <template>
-  <div>
-    <form @submit.prevent="registerUser">
-      <h3>Sign up</h3>
-      <div class="form register">
-        <p class="additionalInfo">
-          If you already have an account in our service please go
-          <router-link to="/login">here</router-link> to sign in.<br />Already
-          registered but you didn't confirm please go
-          <router-link to="/confirm-register">here</router-link> to confirm your
-          registration
-        </p>
-        <div
-          class="formGroup"
-          :class="[
-            {
-              'formGroup--error': $v.user.name.$error,
-            },
-            {
-              'formGroup--success': !$v.user.name.$error && $v.user.name.$dirty,
-            },
-          ]"
-        >
-          <label class="label">e-mail</label>
-          <input
-            class="input"
-            type="text"
-            @blur="!$v.user.name.$touch()"
-            v-model.trim="$v.user.name.$model"
-          />
-          <template v-if="$v.user.name.$error">
-            <p v-if="!$v.user.name.required" class="errorMessage">
-              e-mail is required
-            </p>
-            <p v-if="!$v.user.name.email" class="errorMessage">
-              this is not correct e-mail address
-            </p>
-          </template>
-        </div>
-        <div
-          class="formGroup"
-          :class="[
-            {
-              'formGroup--error': $v.user.password.$error,
-            },
-            {
-              'formGroup--success':
-                !$v.user.password.$error && $v.user.password.$dirty,
-            },
-          ]"
-        >
-          <label class="label">password</label>
-          <input
-            class="input"
-            type="password"
-            @blur="!$v.user.password.$touch()"
-            v-model.trim="$v.user.password.$model"
-          />
-          <template v-if="$v.user.password.$error">
-            <p v-if="!$v.user.password.required" class="errorMessage">
-              password is required
-            </p>
+  <form @submit.prevent="registerUser" class="form">
+    <div class="container register">
+      <h2>Sign up</h2>
+      <p class="additionalInfo">
+        If you already have an account in our service please go
+        <router-link to="/login">here</router-link> to sign in.<br />Already
+        registered but you didn't confirm please go
+        <router-link to="/confirm-register">here</router-link> to confirm your
+        registration
+      </p>
+      <div
+        class="formGroup"
+        :class="[
+          {
+            'formGroup--error': $v.user.name.$error,
+          },
+          {
+            'formGroup--success': !$v.user.name.$error && $v.user.name.$dirty,
+          },
+        ]"
+      >
+        <label class="label">e-mail</label>
+        <input
+          class="input"
+          type="text"
+          @blur="!$v.user.name.$touch()"
+          v-model.trim="$v.user.name.$model"
+        />
+        <template v-if="$v.user.name.$error">
+          <p v-if="!$v.user.name.required" class="errorMessage">
+            e-mail is required
+          </p>
+          <p v-if="!$v.user.name.email" class="errorMessage">
+            this is not correct e-mail address
+          </p>
+        </template>
+      </div>
+      <div
+        class="formGroup"
+        :class="[
+          {
+            'formGroup--error': $v.user.password.$error,
+          },
+          {
+            'formGroup--success':
+              !$v.user.password.$error && $v.user.password.$dirty,
+          },
+        ]"
+      >
+        <label class="label">password</label>
+        <input
+          class="input"
+          type="password"
+          @blur="!$v.user.password.$touch()"
+          v-model.trim="$v.user.password.$model"
+        />
+        <template v-if="$v.user.password.$error">
+          <p v-if="!$v.user.password.required" class="errorMessage">
+            password is required
+          </p>
+          <template v-else>
             <p v-if="!$v.user.password.alphaNum" class="errorMessage">
               password cannot contain characters other than numbers and letters
             </p>
@@ -79,88 +79,88 @@
               password must contain at least one letter
             </p>
           </template>
-        </div>
-        <div
-          class="formGroup"
-          :class="[
-            {
-              'formGroup--error': $v.user.repeatPassword.$error,
-            },
-            {
-              'formGroup--success':
-                !$v.user.repeatPassword.$error && $v.user.repeatPassword.$dirty,
-            },
-          ]"
-        >
-          <label class="label">confirm password</label>
+        </template>
+      </div>
+      <div
+        class="formGroup"
+        :class="[
+          {
+            'formGroup--error':
+              $v.user.repeatPassword.$error || $v.user.password.$error,
+          },
+          {
+            'formGroup--success':
+              !$v.user.repeatPassword.$error &&
+              !$v.user.password.$error &&
+              $v.user.repeatPassword.$dirty,
+          },
+        ]"
+      >
+        <label class="label">confirm password</label>
+        <input
+          class="input"
+          type="password"
+          @blur="!$v.user.repeatPassword.$touch()"
+          v-model.trim="$v.user.repeatPassword.$model"
+        />
+        <template v-if="$v.user.repeatPassword.$error">
+          <p v-if="!$v.user.repeatPassword.required" class="errorMessage">
+            password is required
+          </p>
+          <p v-if="!$v.user.repeatPassword.sameAsPassword" class="errorMessage">
+            password must be identical
+          </p>
+        </template>
+      </div>
+      <div
+        class="formGroup"
+        :class="[
+          {
+            'formGroup--error':
+              $v.user.phone.number.$error || $v.user.phone.countryCode.$error,
+          },
+          {
+            'formGroup--success':
+              !$v.user.phone.number.$error &&
+              $v.user.phone.number.$dirty &&
+              !$v.user.phone.countryCode.$error &&
+              $v.user.phone.countryCode.$dirty,
+          },
+        ]"
+      >
+        <label class="label">phone number</label>
+        <div class="phoneInput">
+          <select
+            v-model="$v.user.phone.countryCode.$model"
+            name="countryCode"
+            @blur="!$v.user.phone.countryCode.$touch()"
+          >
+            <option
+              v-for="code in countryCodes"
+              :key="code.countryCode"
+              :value="code.countryCallingCode"
+            >
+              +{{ code.countryCallingCode }} {{ code.flag }}
+            </option>
+          </select>
           <input
             class="input"
-            type="password"
-            @blur="!$v.user.repeatPassword.$touch()"
-            v-model.trim="$v.user.repeatPassword.$model"
-          />
-          <template v-if="$v.user.repeatPassword.$error">
-            <p v-if="!$v.user.repeatPassword.required" class="errorMessage">
-              password is required
-            </p>
-            <p
-              v-if="!$v.user.repeatPassword.sameAsPassword"
-              class="errorMessage"
-            >
-              password must be identical
-            </p>
-          </template>
-        </div>
-        <div
-          class="formGroup"
-          :class="[
-            {
-              'formGroup--error':
-                $v.user.phone.number.$error || $v.user.phone.countryCode.$error,
-            },
-            {
-              'formGroup--success':
-                !$v.user.phone.number.$error &&
-                $v.user.phone.number.$dirty &&
-                !$v.user.phone.countryCode.$error &&
-                $v.user.phone.countryCode.$dirty,
-            },
-          ]"
-        >
-          <label class="label">phone number</label>
-          <div class="phoneInput">
-            <select
-              v-model="$v.user.phone.countryCode.$model"
-              name="countryCode"
-              @blur="!$v.user.phone.countryCode.$touch()"
-            >
-              <option
-                v-for="code in countryCodes"
-                :key="code.countryCode"
-                :value="code.countryCallingCode"
-              >
-                +{{ code.countryCallingCode }} {{ code.flag }}
-              </option>
-            </select>
-            <input
-              class="input"
-              type="text"
-              @blur="
-                !$v.user.phone.number.$touch();
-                !$v.user.phone.countryCode.$touch();
-              "
-              v-model.trim="$v.user.phone.number.$model"
-            />
-          </div>
-
-          <template
-            v-if="
-              $v.user.phone.number.$error || $v.user.phone.countryCode.$error
+            type="text"
+            @blur="
+              !$v.user.phone.number.$touch();
+              !$v.user.phone.countryCode.$touch();
             "
-          >
-            <p v-if="!$v.user.phone.number.required" class="errorMessage">
-              phone number is required
-            </p>
+            v-model.trim="$v.user.phone.number.$model"
+          />
+        </div>
+
+        <template
+          v-if="$v.user.phone.number.$error || $v.user.phone.countryCode.$error"
+        >
+          <p v-if="!$v.user.phone.number.required" class="errorMessage">
+            phone number is required
+          </p>
+          <template v-else>
             <p
               v-if="
                 !$v.user.phone.number.numeric &&
@@ -177,20 +177,18 @@
               phone number country code is required
             </p>
           </template>
-        </div>
-        <div class="error" v-if="$v.user.$anyError">Form is invalid.</div>
-        <button
-          class="submitBtn"
-          :disabled="
-            $v.user.$anyError || !$v.user.$anyDirty || $v.user.$invalid
-          "
-          type="submit"
-        >
-          sign up
-        </button>
+        </template>
       </div>
-    </form>
-  </div>
+      <div class="error" v-if="$v.user.$anyError">Form is invalid.</div>
+      <button
+        class="submitBtn"
+        :disabled="$v.user.$anyError || !$v.user.$anyDirty || $v.user.$invalid"
+        type="submit"
+      >
+        sign up
+      </button>
+    </div>
+  </form>
 </template>
 
 <script>

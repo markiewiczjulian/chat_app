@@ -1,7 +1,7 @@
 <template>
-  <form @submit.prevent="resendConfirmationCode">
-    <h3>Resend confirmation code</h3>
-    <div class="form resendConfirmation">
+  <form @submit.prevent="resendConfirmationCode" class="form">
+    <div class="container resendConfirmation">
+      <h2>Resend confirmation code</h2>
       <p class="additionalInfo">
         If you didn't register yet please go
         <router-link to="/register">here</router-link>.

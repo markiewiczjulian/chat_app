@@ -1,7 +1,7 @@
 <template>
-  <form @submit.prevent="confirmSignUp">
-    <h3>Confirm sign up</h3>
-    <div class="form confirmRegister">
+  <form @submit.prevent="confirmSignUp" class="form">
+    <div class="container confirmRegister">
+      <h2>Confirm sign up</h2>
       <p class="additionalInfo">
         You should find email with one time code on email which you specified
         when registering. If you didn't get it you can resend it
@@ -57,12 +57,14 @@
           <p v-if="!$v.user.oneTimeCode.required" class="errorMessage">
             one time code is required
           </p>
-          <p v-if="!$v.user.oneTimeCode.numeric" class="errorMessage">
-            one time code should be composed of number only
-          </p>
-          <p v-if="!$v.user.oneTimeCode.minLength" class="errorMessage">
-            one time code should have 8 characters
-          </p>
+          <template v-else>
+            <p v-if="!$v.user.oneTimeCode.numeric" class="errorMessage">
+              one time code should be composed of number only
+            </p>
+            <p v-if="!$v.user.oneTimeCode.minLength" class="errorMessage">
+              one time code should have 8 characters
+            </p>
+          </template>
         </template>
       </div>
       <div class="error" v-if="$v.user.$anyError">Form is invalid.</div>

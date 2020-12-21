@@ -1,7 +1,7 @@
 <template>
-  <form @submit.prevent="loginUser">
-    <h3>Sign in</h3>
-    <div class="form login">
+  <form @submit.prevent="loginUser" class="form">
+    <div class="container login">
+      <h2>Sign in</h2>
       <p class="additionalInfo">
         If you don't have an account in our service please go
         <router-link to="/register">here</router-link> to sign up
@@ -56,24 +56,26 @@
           <p v-if="!$v.user.password.required" class="errorMessage">
             password is required
           </p>
-          <p v-if="!$v.user.password.alphaNum" class="errorMessage">
-            password cannot contain characters other than numbers and letters
-          </p>
-          <p v-if="!$v.user.password.minLength" class="errorMessage">
-            password should be at least 8 characters long
-          </p>
-          <p
-            v-if="!$v.user.password.mustContainAtLeastOneNum"
-            class="errorMessage"
-          >
-            password must contain at least one number
-          </p>
-          <p
-            v-if="!$v.user.password.mustContainAtLeastOneLet"
-            class="errorMessage"
-          >
-            password must contain at least one letter
-          </p>
+          <template v-else>
+            <p v-if="!$v.user.password.alphaNum" class="errorMessage">
+              password cannot contain characters other than numbers and letters
+            </p>
+            <p v-if="!$v.user.password.minLength" class="errorMessage">
+              password should be at least 8 characters long
+            </p>
+            <p
+              v-if="!$v.user.password.mustContainAtLeastOneNum"
+              class="errorMessage"
+            >
+              password must contain at least one number
+            </p>
+            <p
+              v-if="!$v.user.password.mustContainAtLeastOneLet"
+              class="errorMessage"
+            >
+              password must contain at least one letter
+            </p>
+          </template>
         </template>
       </div>
       <div class="error" v-if="$v.user.$anyError">Form is invalid.</div>
@@ -143,4 +145,5 @@
     },
   }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

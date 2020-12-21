@@ -18,7 +18,7 @@
   .errorContainer {
     height: 100vh;
     width: 100vw;
-    background-image: url("../assets/error-background.jpg");
+    background-image: url("../assets/logo.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
