@@ -1,11 +1,7 @@
 <template>
   <div id="app">
     <router-view />
-    <notifications
-      group="notifications"
-      :max="5"
-      position="top right"
-    />
+    <notifications group="notifications" :max="5" position="top right" />
   </div>
 </template>
 
@@ -15,8 +11,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
-    height: 99vh;
+    color: $dark-blue;
+    height: 100vh;
     display: flex;
     flex-direction: column;
   }

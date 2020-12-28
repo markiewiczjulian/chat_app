@@ -99,7 +99,7 @@
     width: 98%;
     left: 0;
     right: 0;
-    margin: auto;
+    margin: auto auto 10px auto;
     height: 50px;
     justify-content: space-evenly;
     border: 3px solid $black-coral;

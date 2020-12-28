@@ -1,28 +1,33 @@
 .vue-notification-group {
   width: 90% !important;
+  margin: auto;
+  margin-top: 10px;
+  left: 0px;
   .vue-notification {
     padding: 10px;
-    margin: 0 5px 5px;
-
-    font-size: 12px;
-
-    color: #ffffff;
-    background: #44a4fc;
-    border-left: 5px solid #187fe7;
+    margin: 0 0 15px 0;
+    border: none;
+    border-radius: 5px;
+    color: $white;
+    background: $notification-blue;
 
     &.warning {
-      background: #ffb648;
-      border-left-color: #f48a06;
+      background: $notification-orange;
     }
 
     &.error {
-      background: #e54d42;
-      border-left-color: #b82e24;
+      background: $notification-red;
     }
 
     &.success {
-      background: #68cd86;
-      border-left-color: #42a85f;
+      background: $notification-green;
+    }
+    .notification-title,
+    .notification-content {
+      font-size: $font-size-md;
+    }
+    .notification-title {
+      margin-bottom: 5px;
     }
   }
 }
@@ -30,6 +35,8 @@
 @media screen and (min-width: $breakpoint-md) {
   .vue-notification-group {
     width: 40% !important;
+    margin: 10px;
+    left: unset;
   }
 }
 @media screen and (min-width: $breakpoint-lg) {
