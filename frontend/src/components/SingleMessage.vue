@@ -1,12 +1,13 @@
 <template>
   <div
     :class="[
-      message.sender === currentUserName ? 'loggedUserMsg' : '',
+      message.sender === getCurrentUser() ? 'loggedUserMsg' : '',
       'singleMessage',
     ]"
   >
     <div class="authorAvatar">
-      <img src="../assets/avatars/19.svg" alt="" />
+      <img v-if="message.sender === getCurrentUser()" :src="getAvatarPath()" />
+      <img v-else src="../assets/avatars/20.svg" />
     </div>
     <div class="content">
       <span class="author">
@@ -20,6 +21,7 @@
 
 <script>
   import objectIdToTimestamp from "objectid-to-timestamp";
+  import { mapGetters } from 'vuex';
 
   export default {
     name: "SingleMessage",
@@ -32,9 +34,14 @@
       currentUserName: { type: String, default: "" }
     },
     methods: {
+      ...mapGetters({ getCurrentUser: 'user/getCurrentUser', getCurrentUserAvatar: 'user/getCurrentUserAvatar' }),
       idToTimestamp(id) {
         const date = new Date(objectIdToTimestamp(id));
         return date.toLocaleString('pl-PL', { timeZone: 'UTC' });
+      },
+      getAvatarPath() {
+        const avatarNum = this.getCurrentUserAvatar() || "1";
+        return require(`../assets/avatars/${avatarNum}.svg`);
       },
     },
   }

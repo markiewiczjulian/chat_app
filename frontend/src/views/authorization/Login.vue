@@ -127,8 +127,8 @@
             password: this.user.password,
           }
           try {
-            await Auth.signIn(user);
-            this.setCurrUser(this.user.name);
+            const result = await Auth.signIn(user);
+            this.setCurrUser({ userName: result.attributes.email, avatarNum: result.attributes[ "custom:avatar_num" ] });
             this.success(
               'success',
               'You have been successfuly logged in');

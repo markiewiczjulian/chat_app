@@ -41,6 +41,7 @@
       }
       &:hover {
         background-color: $light-green;
+        transition: background-color 0.2s ease-in-out;
       }
     }
     .formGroup {

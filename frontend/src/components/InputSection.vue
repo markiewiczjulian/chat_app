@@ -73,7 +73,6 @@
       },
       scrollToBottom() {
         let messagesContainer = document.getElementsByClassName("messagesContainer");
-        console.log(messagesContainer);
         if (messagesContainer.length) {
           setTimeout(() => {
             messagesContainer[ 0 ].scrollTop = messagesContainer[ 0 ].scrollHeight - messagesContainer[ 0 ].clientHeight;

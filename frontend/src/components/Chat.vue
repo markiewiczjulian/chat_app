@@ -1,10 +1,9 @@
 <template>
   <div class="chatContainer">
-    <div class="messagesContainer">
+    <div class="messagesContainer" v-on:scroll="handleScroll">
       <SingleMessage
         v-for="(message, index) of messages"
         :message="message"
-        :currentUserName="currUserName"
         :key="index"
       />
     </div>
@@ -16,6 +15,13 @@
         @typing="emitTypingInfo($event)"
         @sendMsg="sendMessage($event)"
       />
+    </div>
+    <div
+      v-if="showToBottomBtn"
+      class="moveToBottomBtn"
+      @click="this.scrollToBottom"
+    >
+      <font-awesome-icon :icon="['fas', 'arrow-down']" />
     </div>
   </div>
 </template>
@@ -33,7 +39,8 @@
         socket: {},
         messages: [],
         userTypingInfo: "",
-        currUserName: ""
+        currUserName: "",
+        showToBottomBtn: false
       };
     },
     components: {
@@ -42,7 +49,6 @@
     },
     created() {
       this.socket = io("http://localhost:5002/");
-      this.currUserName = this.getCurrentUser();
     },
     mounted() {
       this.axios.get("http://localhost:5002/chatRoom").then((res) => {
@@ -50,6 +56,8 @@
           el.message = this.parseEmoji(el.message);
         });
         this.messages = res.data;
+        this.scrollToBottom();
+        this.currUserName = this.getCurrentUser();
       });
 
       this.socket.on("receivedMessage", (data) => {
@@ -70,16 +78,24 @@
     },
     methods: {
       ...mapGetters({ getCurrentUser: 'user/getCurrentUser' }),
+      handleScroll($event) {
+        this.showToBottomBtn = $event.target.scrollTop < $event.target.scrollHeight - ($event.target.clientHeight + 50);
+      },
       sendMessage(message) {
-        // add current user name to the store and get here
         this.socket.emit("addedMessage", message, this.currUserName);
+      },
+      scrollToBottom() {
+        let messagesContainer = document.getElementsByClassName("messagesContainer");
+        if (messagesContainer.length) {
+          setTimeout(() => {
+            messagesContainer[ 0 ].scrollTop = messagesContainer[ 0 ].scrollHeight - messagesContainer[ 0 ].clientHeight;
+          }, 100);
+        }
       },
       emitTypingInfo(event) {
         if (event) {
-          // add current user name to the store and get here
           this.socket.emit("typing", this.currUserName);
         } else {
-          // add current user name to the store and get here
           this.socket.emit("stoppedTyping", this.currUserName);
         }
       }
@@ -96,7 +112,6 @@
     flex-direction: column;
     align-self: center;
     padding-bottom: 10px;
-    // TODO
     .messagesContainer {
       padding: 0 20px;
       overflow-y: scroll;
@@ -110,6 +125,27 @@
       bottom: 0;
       width: 100%;
       color: red;
+    }
+    .moveToBottomBtn {
+      position: absolute;
+      bottom: 15%;
+      left: 50%;
+      transform: translate(-50%, 0);
+      color: $white;
+      background-color: $melon;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $font-size-xl;
+      cursor: pointer;
+      box-shadow: 1px 1px 6px $grey;
+      &:hover {
+        background-color: $light-melon;
+        transition: background-color 0.2s ease-in-out;
+      }
     }
   }
 

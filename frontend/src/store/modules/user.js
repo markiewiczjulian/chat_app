@@ -21,13 +21,13 @@ export const mutations = {
 };
 
 export const actions = {
-  setCurrentUser({ commit }, userName) {
-    commit("SET_USER", userName);
-    const randomAvatarNum = 1 + Math.floor(20 * Math.random());
-    commit("SET_AVATAR", randomAvatarNum);
+  setCurrentUser({ commit }, payload) {
+    commit("SET_USER", payload.userName);
+    commit("SET_AVATAR", payload.avatarNum || "1");
   },
   removeCurrentUser({ commit }) {
     commit("REMOVE_USER");
+    commit("REMOVE_AVATAR");
   },
 };
 
@@ -36,6 +36,9 @@ export const getters = {
     return Object.keys(state.user).length ? state.user : null;
   },
   getCurrentUserAvatar: (state) => {
+    return Object.keys(state.avatar).length ? state.avatar : null;
+  },
+  getUserAvatar: (state) => {
     return Object.keys(state.avatar).length ? state.avatar : null;
   },
 };

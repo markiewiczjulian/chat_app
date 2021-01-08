@@ -9,7 +9,7 @@ import {
   faLaughWink,
   faPaperPlane,
 } from "@fortawesome/free-regular-svg-icons";
-import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import { faPowerOff, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Vuelidate from "vuelidate";
 import Amplify from "aws-amplify";
@@ -20,7 +20,7 @@ import store from "./store";
 import Notifications from "vue-notification";
 
 Amplify.configure(awsconfig);
-library.add(faLaughWink, faLaugh, faPaperPlane, faPowerOff);
+library.add(faLaughWink, faLaugh, faPaperPlane, faPowerOff, faArrowDown);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
 [[VueAxios, axios], [Vuelidate], [Notifications]].forEach((args) =>

@@ -233,12 +233,14 @@
       ...mapActions({ setCurrUser: "user/setCurrentUser" }),
       async registerUser() {
         if (this.user) {
+          const randomAvatarNum = this.getRandomAvatarNumber();
           const newUser = {
             username: this.user.name,
             password: this.user.password,
             attributes: {
               email: this.user.name,
               phone_number: `+${this.user.phone.countryCode}${this.user.phone.number}`,
+              'custom:avatar_num': `${randomAvatarNum}`
             }
           }
           try {
@@ -253,6 +255,12 @@
             this.error('error when registering', error.message);
           }
         }
+      },
+      getRandomAvatarNumber() {
+        const avatarsLength = 20;
+        return Math.floor(
+          Math.random() * Math.floor(avatarsLength),
+        );
       },
       createEmptyUserObj() {
         return {

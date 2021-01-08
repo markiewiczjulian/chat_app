@@ -2,7 +2,7 @@
   <div class="navbar">
     <div class="content">
       <div class="loggedUserSection">
-        <img src="../assets/avatars/19.svg" alt="" class="avatar" />
+        <img :src="getAvatarPath()" alt="" class="avatar" />
         <p class="name">{{ currUserName }}</p>
       </div>
       <font-awesome-icon
@@ -29,7 +29,7 @@
       this.currUserName = this.getCurrentUser();
     },
     methods: {
-      ...mapGetters({ getCurrentUser: 'user/getCurrentUser' }),
+      ...mapGetters({ getCurrentUser: 'user/getCurrentUser', getCurrentUserAvatar: 'user/getCurrentUserAvatar' }),
       ...mapActions({ removeCurrentUser: 'user/removeCurrentUser' }),
       async logOut() {
         try {
@@ -39,6 +39,10 @@
         } catch (error) {
           console.log('error signing out: ', error);
         }
+      },
+      getAvatarPath() {
+        const avatarNum = this.getCurrentUserAvatar() || "1";
+        return require(`../assets/avatars/${avatarNum}.svg`);
       }
     },
   }
