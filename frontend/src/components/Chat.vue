@@ -7,21 +7,23 @@
         :key="index"
       />
     </div>
-    <div v-show="this.userTypingInfo.length" class="userInfo">
-      {{ this.userTypingInfo }}
-    </div>
     <div>
       <InputSection
         @typing="emitTypingInfo($event)"
         @sendMsg="sendMessage($event)"
       />
     </div>
-    <div
-      v-if="showToBottomBtn"
-      class="moveToBottomBtn"
-      @click="this.scrollToBottom"
-    >
-      <font-awesome-icon :icon="['fas', 'arrow-down']" />
+    <div class="additionalControls">
+      <div
+        v-if="showToBottomBtn"
+        class="moveToBottomBtn"
+        @click="this.scrollToBottom"
+      >
+        <font-awesome-icon :icon="['fas', 'arrow-down']" />
+      </div>
+      <div v-show="this.userTypingInfo.length" class="userInfo">
+        {{ this.userTypingInfo }}
+      </div>
     </div>
   </div>
 </template>
@@ -63,6 +65,7 @@
       this.socket.on("receivedMessage", (data) => {
         data.message = this.parseEmoji(data.message);
         this.messages.push(data);
+        this.showToBottomBtn = true;
         this.userTypingInfo = "";
       });
 
@@ -120,31 +123,46 @@
       display: flex;
       flex-direction: column;
     }
-    .userInfo {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      color: red;
-    }
-    .moveToBottomBtn {
-      position: absolute;
-      bottom: 15%;
-      left: 50%;
-      transform: translate(-50%, 0);
-      color: $white;
-      background-color: $melon;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
+    .additionalControls {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: $font-size-xl;
-      cursor: pointer;
-      box-shadow: 1px 1px 6px $grey;
-      &:hover {
-        background-color: $light-melon;
-        transition: background-color 0.2s ease-in-out;
+      position: absolute;
+      bottom: 10%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      .userInfo {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        color: $white;
+        background-color: $melon;
+        box-shadow: 1px 1px 6px $grey;
+        display: flex;
+        width: max-content;
+        align-self: center;
+        padding: 5px;
+        border-radius: 10px;
+      }
+      .moveToBottomBtn {
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+        color: $white;
+        background-color: $melon;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: $font-size-xl;
+        cursor: pointer;
+        box-shadow: 1px 1px 6px $grey;
+        &:hover {
+          background-color: $light-melon;
+          transition: background-color 0.2s ease-in-out;
+        }
       }
     }
   }
