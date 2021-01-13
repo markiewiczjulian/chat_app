@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Manual trigger'     
+        required: true
+        default: 'Manually triggered build' 
 
 jobs:
   build:
