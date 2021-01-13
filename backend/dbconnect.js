@@ -8,9 +8,15 @@ const {
   MONGO_HOSTNAME,
   MONGO_PORT,
   MONGO_DB,
+  PROD,
 } = process.env;
 
-const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`;
+let url;
+if (PROD) {
+  url = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}`;
+} else {
+  url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`;
+}
 
 console.log(url);
 
