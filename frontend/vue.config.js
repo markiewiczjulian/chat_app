@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '/chat_app_prod_ready/'
+  publicPath: '/chat_app_prod_ready/',
   css: {
     loaderOptions: {
       sass: {
