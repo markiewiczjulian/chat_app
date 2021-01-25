@@ -7,12 +7,11 @@ const {
   MONGO_PASSWORD,
   MONGO_HOSTNAME,
   MONGO_PORT,
-  MONGO_DB,
-  PROD,
+  MONGO_DB
 } = process.env;
 
 let url;
-if (PROD) {
+if (process.env.NODE_ENV === "production") {
   url = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}`;
 } else {
   url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`;

@@ -1,0 +1,5 @@
+VUE_APP_AWS_REGION = your aws region
+VUE_APP_AWS_COGNITO_I_POOL_ID = your cognito identity pool id
+VUE_APP_AWS_COGNITO_REGION = your cognito region
+VUE_APP_AWS_COGNITO_U_POOL_ID = your cognito user poll id
+VUE_APP_AWS_COGNITO_U_POOL_CLIENT_ID = your cognito user poll client id

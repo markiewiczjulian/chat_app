@@ -22,6 +22,8 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           appdir: backend
+        env:
+          NODE_ENV: production
   build_frontend:
     runs-on: ubuntu-latest
     steps:
