@@ -13,7 +13,6 @@ import { faPowerOff, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Vuelidate from "vuelidate";
 import Amplify from "aws-amplify";
-import "@aws-amplify/ui-vue";
 import amplify_config from "./aws-custom-exports";
 import router from "./router";
 import store from "./store";
