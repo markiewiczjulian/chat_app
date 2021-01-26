@@ -32,5 +32,5 @@ You can check out live version [here](https://markiewiczjulian.github.io/chat_ap
 5. In fronted directory copy .envExample file and rename it to .env. Replace all properties to proper ones (all this information you can find in not versioned file src/aws-exports.js).
 6. Push the amplify configuration to cloud by running `amplify push`.
 7. When still in frontend directory run `npm install` to install all dependencies.
-8. After this you are ready to run npm run dev.
+8. After this you are ready to run `npm run dev`.
 9. There should be no users in your new user pool, so you will have to create one using register page.
