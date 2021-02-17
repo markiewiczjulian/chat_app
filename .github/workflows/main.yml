@@ -62,7 +62,7 @@ jobs:
       - name: Install Amplify CLI & Deploy Project
         run: |    
           cd frontend
-          npm install -g @aws-amplify/cli --unsafe-perm=true
+          npm install -g @aws-amplify/cli@4.11.0 --unsafe-perm=true
           bash init.sh
           bash push.sh
           amplify codegen
