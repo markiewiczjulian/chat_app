@@ -35,7 +35,7 @@ PROVIDERS="{\
 }"
 
 amplify init \
--- amplify $AMPLIFY \
--- frontend $FRONTEND \
--- providers $PROVIDERS \
--- yes
+--amplify $AMPLIFY \
+--frontend $FRONTEND \
+--providers $PROVIDERS \
+--yes
