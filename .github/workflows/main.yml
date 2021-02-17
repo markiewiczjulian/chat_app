@@ -62,6 +62,7 @@ jobs:
       - name: Install Amplify CLI & Deploy Project
         run: |    
           cd frontend
+          npm config set ignore-scripts false
           ls -a
           npm install -g @aws-amplify/cli --unsafe-perm=true
           bash init.sh
