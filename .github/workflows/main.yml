@@ -61,8 +61,10 @@ jobs:
       - name: Install Amplify CLI & Deploy Project
         run: |     
           npm install -g @aws-amplify/cli --unsafe-perm=true
-          bash init.sh
-          bash push.sh
+          pwd
+          ls -a
+          bash ./frontend/init.sh
+          bash ./frontend/push.sh
           amplify codegen
       - name: Commit Amplify Files
         uses: stefanzweifel/git-auto-commit-action@v4.2.0
