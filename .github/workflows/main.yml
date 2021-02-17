@@ -46,7 +46,7 @@ jobs:
           NODE_ENV=production npm run build
       - uses: actions/setup-node@v1
         with:
-        node-version: '12.x'   
+          node-version: '12.x'   
       - name: Install AWS CLI & Configure Profile Credentials
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.VUE_APP_AWS_KEY_ID }}
