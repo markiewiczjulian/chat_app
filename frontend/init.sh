@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-IFS=’|’
+IFS='|'
 
 VUECONFIG=”{\
 \”SourceDir\”:\”src\”,\

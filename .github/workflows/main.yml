@@ -52,6 +52,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.VUE_APP_AWS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.VUE_APP_AWS_ACCESS_KEY }}
         run: |
+          cd frontend
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
           sudo ./aws/install
@@ -59,12 +60,11 @@ jobs:
           aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile default
           aws configure set default.region us-east-1
       - name: Install Amplify CLI & Deploy Project
-        run: |     
+        run: |    
+          cd frontend
           npm install -g @aws-amplify/cli --unsafe-perm=true
-          pwd
-          ls -a
-          bash ./frontend/init.sh
-          bash ./frontend/push.sh
+          bash init.sh
+          bash push.sh
           amplify codegen
       - name: Commit Amplify Files
         uses: stefanzweifel/git-auto-commit-action@v4.2.0
