@@ -13,6 +13,7 @@ AWSCLOUDFORMATIONCONFIG="{\
 \"configLevel\":\"project\",\
 \"useProfile\":false,\
 \"profileName\":\"default\",\
+\"region\":\"eu-west-1\",\
 \"accessKeyId\":$AWS_ACCESS_KEY_ID,\
 \"secretAccessKey\":$AWS_SECRET_ACCESS_KEY\
 }"
