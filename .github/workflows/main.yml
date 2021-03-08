@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       logLevel:
-        description: 'Manual trigger'     
+        description: "Manual trigger"
         required: true
-        default: 'Manually triggered build' 
+        default: "Manually triggered build"
 
 jobs:
   build_backend:
@@ -46,7 +46,7 @@ jobs:
           NODE_ENV=production npm run build
       - uses: actions/setup-node@v1
         with:
-          node-version: '12.x'   
+          node-version: "12.x"
       - name: Install AWS CLI & Configure Profile Credentials
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.VUE_APP_AWS_KEY_ID }}
@@ -63,9 +63,9 @@ jobs:
         env:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.VUE_APP_AWS_ACCESS_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.VUE_APP_AWS_KEY_ID }}
-        run: |    
+        run: |
           cd frontend
-          npm install -g @aws-amplify/cli@4.13.1 --unsafe-perm=true
+          npm install -g @aws-amplify/cli --unsafe-perm=true
           bash init.sh
           bash push.sh
           amplify codegen
@@ -73,7 +73,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4.2.0
         with:
           commit_message: Apply automatic changes
-          file_pattern: amplify/* graphql/* amplifyconfiguration.json awsconfiguration.json API.swift  
+          file_pattern: amplify/* graphql/* amplifyconfiguration.json awsconfiguration.json API.swift
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
