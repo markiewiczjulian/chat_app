@@ -12,14 +12,13 @@ VUECONFIG="{\
 AWSCLOUDFORMATIONCONFIG="{\
 \"configLevel\":\"project\",\
 \"useProfile\":false,\
+\"profileName\":\"default\",\
 \"accessKeyId\":$AWS_ACCESS_KEY_ID,\
-\"secretAccessKey\":$AWS_SECRET_ACCESS_KEY,\
-\"region\":\"eu-west-1\"\
+\"secretAccessKey\":$AWS_SECRET_ACCESS_KEY\
 }"
 
 AMPLIFY="{\
 \"projectName\":\"chatApp\",\
-\"appId\":\"d173wp33kkso7c\",\
 \"envName\":\"dev\",\
 \"defaultEditor\":\"code\",\
 \"appId\":\"d173wp33kkso7c\"\
