@@ -16,7 +16,7 @@
     display: flex;
     flex-direction: column;
   }
-  body {
+  body { 
     margin: 0;
     padding: 0;
   }
