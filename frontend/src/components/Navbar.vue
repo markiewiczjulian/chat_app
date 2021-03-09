@@ -35,7 +35,7 @@
         try {
           await Auth.signOut();
           this.removeCurrentUser();
-          this.$router.push('/login');
+          this.$router.push('/login').catch(() => { });;
         } catch (error) {
           console.log('error signing out: ', error);
         }

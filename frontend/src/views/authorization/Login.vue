@@ -133,7 +133,7 @@
               'success',
               'You have been successfuly logged in');
             this.user = this.createEmptyUserObj();
-            this.$router.push('/');
+            this.$router.push('/').catch(() => { });;
           } catch (error) {
             this.error('error when logging in', error.message);
           }

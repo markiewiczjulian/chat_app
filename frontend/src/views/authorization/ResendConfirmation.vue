@@ -76,7 +76,7 @@
             'success',
             'You have successfuly resend the confirmation code');
           this.user = this.createEmptyUserObj();
-          this.$router.push('/confirm-register');
+          this.$router.push('/confirm-register').catch(() => {});;
         } catch (error) {
           this.error('error when resending confirmation code', error.message);
         }

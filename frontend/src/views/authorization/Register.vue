@@ -250,7 +250,7 @@
               'success',
               'You have been successfuly registered');
             this.user = this.createEmptyUserObj();
-            this.$router.push('/confirm-register');
+            this.$router.push('/confirm-register').catch(() => { });;
           } catch (error) {
             this.error('error when registering', error.message);
           }
