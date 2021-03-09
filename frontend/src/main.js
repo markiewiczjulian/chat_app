@@ -13,9 +13,9 @@ import { faPowerOff, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Vuelidate from "vuelidate";
 import Amplify, { Auth } from "aws-amplify";
-import amplify_config from "./aws-exports";
-import router from "./router";
-import store from "./store";
+import amplify_config from "@/aws-exports";
+import router from "@/router";
+import store from "@/store";
 import Notifications from "vue-notification";
 
 Amplify.configure(amplify_config);

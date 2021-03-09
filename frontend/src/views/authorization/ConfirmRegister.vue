@@ -82,7 +82,7 @@
   import { Auth } from 'aws-amplify';
   import { required, numeric, email, minLength } from "vuelidate/lib/validators";
   import { mapGetters, mapActions } from 'vuex';
-  import notificationMixin from "../../mixins/notificationMixin";
+  import notificationMixin from "@/mixins/notificationMixin";
 
   export default {
     name: 'ConfirmRegister',

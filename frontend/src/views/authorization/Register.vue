@@ -195,8 +195,8 @@
   import { Auth } from 'aws-amplify';
   import { required, alphaNum, email, numeric, minLength, sameAs } from "vuelidate/lib/validators";
   import { mapActions } from 'vuex';
-  import notificationMixin from "../../mixins/notificationMixin";
-  const countriesData = require('../../assets/constants/countryCodes');
+  import notificationMixin from "@/mixins/notificationMixin";
+  const countriesData = require('@/assets/constants/countryCodes');
 
   const mustContainAtLeastOneNum = (value) => /\d/.test(value);
   const mustContainAtLeastOneLet = (value) => /[a-zA-Z]/.test(value);

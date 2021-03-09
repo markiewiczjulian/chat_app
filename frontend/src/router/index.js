@@ -3,10 +3,10 @@ import VueRouter from "vue-router";
 import Login from "../views/authorization/Login.vue";
 import Register from "../views/authorization/Register.vue";
 import ConfirmRegister from "../views/authorization/ConfirmRegister.vue";
-import ResendConfirmation from "../views/authorization/ResendConfirmation.vue";
-import ChatRoom from "../views/ChatRoom.vue";
-import ErrorPage from "../views/Error.vue";
-import store from "../store/";
+import ResendConfirmation from "@/views/authorization/ResendConfirmation.vue";
+import ChatRoom from "@/views/ChatRoom.vue";
+import ErrorPage from "@/views/Error.vue";
+import store from "@/store/";
 
 Vue.use(VueRouter);
 

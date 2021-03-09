@@ -30,8 +30,8 @@
 
 <script>
   import io from "socket.io-client";
-  import SingleMessage from './SingleMessage.vue';
-  import InputSection from './InputSection';
+  import SingleMessage from '@/components/SingleMessage.vue';
+  import InputSection from '@/components/InputSection';
   import { mapGetters } from 'vuex';
 
   export default {
