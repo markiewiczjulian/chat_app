@@ -1,6 +1,6 @@
 {
   "auth": {
-    "chatappauthe44c93db": {
+    "chatappd8f907c3": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -10,8 +10,8 @@
   "hosting": {
     "amplifyhosting": {
       "service": "amplifyhosting",
-      "type": "cicd",
-      "lastPushTimeStamp": "2021-03-09T11:35:49.519Z"
+      "providerPlugin": "awscloudformation",
+      "type": "manual"
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "projectName": "chatappauth",
+  "projectName": "chatapp",
   "version": "3.0",
   "frontend": "javascript",
   "javascript": {
@@ -8,7 +8,7 @@
       "SourceDir": "src",
       "DistributionDir": "dist",
       "BuildCommand": "npm run-script build",
-      "StartCommand": "npm run-script start"
+      "StartCommand": "npm run-script serve"
     }
   },
   "providers": [
