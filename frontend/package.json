@@ -8,11 +8,13 @@
     "dev": "vue-cli-service serve"
   },
   "dependencies": {
+    "@aws-amplify/ui-components": "^1.0.4",
+    "@aws-amplify/ui-vue": "^1.0.4",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/vue-fontawesome": "^2.0.0",
-    "aws-amplify": "^3.3.11",
+    "aws-amplify": "^3.3.23",
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "node-emoji": "^1.10.0",

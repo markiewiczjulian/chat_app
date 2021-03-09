@@ -12,13 +12,14 @@ import {
 import { faPowerOff, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Vuelidate from "vuelidate";
-import Amplify from "aws-amplify";
+import Amplify, { Auth } from "aws-amplify";
 import amplify_config from "./aws-exports";
 import router from "./router";
 import store from "./store";
 import Notifications from "vue-notification";
 
 Amplify.configure(amplify_config);
+Auth.configure(amplify_config);
 library.add(faLaughWink, faLaugh, faPaperPlane, faPowerOff, faArrowDown);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;

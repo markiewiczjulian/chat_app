@@ -19,7 +19,7 @@ AWSCLOUDFORMATIONCONFIG="{\
 }"
 
 AMPLIFY="{\
-\"projectName\":\"chatApp\",\
+\"projectName\":\"chatappauth\",\
 \"envName\":\"dev\",\
 \"defaultEditor\":\"code\",\
 \"appId\":\"d173wp33kkso7c\"\

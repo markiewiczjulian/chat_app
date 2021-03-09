@@ -1,6 +1,6 @@
 {
   "auth": {
-    "chatapp9a29f712": {
+    "chatappauthe44c93db": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

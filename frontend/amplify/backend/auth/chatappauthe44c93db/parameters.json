@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "chatapp9a29f712_identitypool_9a29f712",
+    "identityPoolName": "chatappauthe44c93db_identitypool_e44c93db",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "chatap9a29f712",
-    "userPoolName": "chatapp9a29f712_userpool_9a29f712",
+    "resourceNameTruncated": "chatape44c93db",
+    "userPoolName": "chatappauthe44c93db_userpool_e44c93db",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "chatap9a29f712_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "chatape44c93db_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "9a29f712",
-    "resourceName": "chatapp9a29f712",
+    "sharedId": "e44c93db",
+    "resourceName": "chatappauthe44c93db",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
