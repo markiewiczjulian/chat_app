@@ -33,12 +33,12 @@ export const actions = {
 
 export const getters = {
   getCurrentUser: (state) => {
-    return Object.keys(state.user).length ? state.user : null;
+    return state.user && Object.keys(state.user).length ? state.user : null;
   },
   getCurrentUserAvatar: (state) => {
-    return Object.keys(state.avatar).length ? state.avatar : null;
+    return state.avatar && Object.keys(state.avatar).length ? state.avatar : null;
   },
   getUserAvatar: (state) => {
-    return Object.keys(state.avatar).length ? state.avatar : null;
+    return state.avatar && Object.keys(state.avatar).length ? state.avatar : null;
   },
 };
