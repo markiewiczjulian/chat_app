@@ -50,10 +50,10 @@
       InputSection
     },
     created() {
-      this.socket = io("http://localhost:5002/");
+      this.socket = io(process?.env?.VUE_APP_BACKEND_SOCKET_ADDR || "http://localhost:5002/");
     },
     mounted() {
-      this.axios.get("http://localhost:5002/chatRoom").then((res) => {
+      this.axios.get(process?.env?.VUE_APP_BACKEND_CHAT_MSG_ADDR || "http://localhost:5002/chatRoom").then((res) => {
         res.data.map((el) => {
           el.message = this.parseEmoji(el.message);
         });

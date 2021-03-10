@@ -1,0 +1,2 @@
+VUE_APP_BACKEND_SOCKET_ADDR = backend address
+VUE_APP_BACKEND_CHAT_MSG_ADDR = chat msg address
