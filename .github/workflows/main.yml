@@ -24,3 +24,14 @@ jobs:
           appdir: backend
         env:
           NODE_ENV: production
+  publish_frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install and publish
+        env:
+          VUE_APP_BACKEND_SOCKET_ADDR: ${{ secrets.VUE_APP_BACKEND_SOCKET_ADDR }}
+          VUE_APP_BACKEND_CHAT_MSG_ADDR: ${{ secrets.VUE_APP_BACKEND_CHAT_MSG_ADDR }}
+        run: |
+          cd frontend
+          npm install
+          npm publish
