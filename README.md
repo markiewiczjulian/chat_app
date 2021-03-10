@@ -35,7 +35,7 @@ You can check out live version [here](https://dev.d3u86g5tze9ctl.amplifyapp.com/
 8. After this you are ready to run `npm run dev`.
 9. There should be no users in your new user pool, so you will have to create one using register page.
 
-##TODO
+## TODO
 
 1. Tests, we need more tests.
 2. Add option forget password.
