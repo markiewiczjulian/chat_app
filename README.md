@@ -34,3 +34,9 @@ You can check out live version [here](https://dev.d3u86g5tze9ctl.amplifyapp.com/
 7. When still in frontend directory run `npm install` to install all dependencies.
 8. After this you are ready to run `npm run dev`.
 9. There should be no users in your new user pool, so you will have to create one using register page.
+
+##TODO
+
+1. Tests, we need more tests.
+2. Add option forget password.
+3. Add option to choose the avatar to register form (instead of assigning random one).
