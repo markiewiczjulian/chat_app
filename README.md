@@ -1,10 +1,12 @@
 # chat_app
 
-Node.js, vue.js chat app
+Node.js, vue.js, mongodb, AWS chat app
 
 You can check out live version [here](https://dev.d3u86g5tze9ctl.amplifyapp.com/). Frontend is build manually (command `npm run deploy`) using AWS Amplify and stored on AWS. Backend is build using [akhileshns/heroku-deploy](https://github.com/AkhileshNS/heroku-deploy) to heroku. Database is hosted on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
-# Running locally 
+# Running locally
+
+> This project is a monorepo meaning that backend and frontend are stored within this repository in dedicated directories called backend and frontend. All commands that correspond to setup of for example backend should be run in the backend (if not stated otherwise).
 
 ## Prerequisites
 
@@ -16,7 +18,7 @@ You can check out live version [here](https://dev.d3u86g5tze9ctl.amplifyapp.com/
 ## Setup backend
 
 1. You should copy the file backend/.envExample and rename to .env. All fields need to be filled (you will have to check your mongodb configuration).
-2. Run npm install to install all needed packages.
+2. Run `npm install` to install all needed packages.
 3. Now you can run backend with `npm run dev`.
 
 ## Setup frontend
@@ -35,7 +37,11 @@ You can check out live version [here](https://dev.d3u86g5tze9ctl.amplifyapp.com/
 8. After this you are ready to run `npm run dev`.
 9. There should be no users in your new user pool, so you will have to create one using register page.
 
-## TODO
+## Deploy on AWS
+
+If you wish to use the AWS amplify `amplify publish` command to add this app automatically to your AWS you will have to add the hosting `amplify add hosting` and then choose either automatic builds or manual ones. FOr more info about this check [this](https://aws.amazon.com/blogs/aws/host-your-apps-with-aws-amplify-console-from-the-aws-amplify-cli/) article from AWS team. When you are ready (and if you have chosen the manual deploy) you can run the `amplify publish` command (or `npm run deploy` which basically does the same thing) or you can just push changes to your repo and let the AWS deploy your app automatically.
+
+# TODO
 
 1. Tests, we need more tests.
 2. Add option forget password.
