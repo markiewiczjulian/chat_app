@@ -1,6 +1,6 @@
 # chat_app
 
-Node.js, vue.js, mongodb, AWS chat app
+Node.js, vue.js, mongodb, AWS (especially AWS Amplify) chat app
 
 You can check out live version [here](https://dev.d3u86g5tze9ctl.amplifyapp.com/). Frontend is build manually (command `npm run deploy`) using AWS Amplify and stored on AWS. Backend is build using [akhileshns/heroku-deploy](https://github.com/AkhileshNS/heroku-deploy) to heroku. Database is hosted on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
