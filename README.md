@@ -39,7 +39,7 @@ You can check out live version [here](https://dev.d3u86g5tze9ctl.amplifyapp.com/
 
 ## Deploy on AWS
 
-If you wish to use the AWS amplify `amplify publish` command to add this app automatically to your AWS you will have to add the hosting `amplify add hosting` and then choose either automatic builds or manual ones. FOr more info about this check [this](https://aws.amazon.com/blogs/aws/host-your-apps-with-aws-amplify-console-from-the-aws-amplify-cli/) article from AWS team. When you are ready (and if you have chosen the manual deploy) you can run the `amplify publish` command (or `npm run deploy` which basically does the same thing) or you can just push changes to your repo and let the AWS deploy your app automatically.
+If you wish to use the AWS amplify `amplify publish` command to add this app automatically to your AWS you will have to add the hosting `amplify add hosting` and then choose either automatic builds or manual ones. For more info about this check [this](https://aws.amazon.com/blogs/aws/host-your-apps-with-aws-amplify-console-from-the-aws-amplify-cli/) article from AWS team. When you are ready (and if you have chosen the manual deploy) you can run the `amplify publish` command (or `npm run deploy` which basically does the same thing) or you can just push changes to your repo and let the AWS deploy your app automatically.
 
 # TODO
 
